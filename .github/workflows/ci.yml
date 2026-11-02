@@ -53,16 +53,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version-file: go.mod
+      # Breaking changes are judged against the release label, in release-label.yml.
       - run: make proto-check
-      - name: buf breaking
-        run: |
-          tag=$(git describe --tags --match 'api/v*' --abbrev=0 2>/dev/null || true)
-          if [ -n "$tag" ]; then go tool buf breaking --against ".git#tag=$tag"; fi
 
   image:
     runs-on: ubuntu-latest

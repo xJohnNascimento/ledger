@@ -68,6 +68,10 @@ curl -s localhost:9090/ledger.v1.LedgerService/GetBalance -H "Authorization: Bea
 docker compose exec ledger /ledger audit corridor
 ```
 
+## Releases
+
+Every pull request carries one label that says what merging it releases: `release: major`, `release: minor`, `release: patch` or `release: none`. Once it merges and CI passes on `main`, the next version is tagged twice, `vX.Y.Z` for the service and `api/vX.Y.Z` for the Go API module, with GitHub release notes and a signed multi-architecture image on GitHub Container Registry. A change that breaks the API compared with the last release must be labelled `release: major`, or `release: minor` before 1.0.
+
 ## Documentation
 
 | Document | Contents |
