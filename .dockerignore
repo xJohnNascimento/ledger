@@ -1,0 +1,9 @@
+*
+!go.mod
+!go.sum
+!api
+!cmd
+!internal
+!migrations
+!deploy/clients.yaml
+**/*_test.go

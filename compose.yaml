@@ -1,0 +1,53 @@
+name: ledger
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ledger
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ledger"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+
+  migrate:
+    build: .
+    command: ["migrate"]
+    environment:
+      LEDGER_DATABASE_URL: postgres://postgres@postgres:5432/ledger?sslmode=disable
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  ledger:
+    build: .
+    command: ["serve"]
+    environment:
+      LEDGER_ADDR: ":9090"
+      LEDGER_DATABASE_URL: postgres://ledger_app@postgres:5432/ledger?sslmode=disable
+      LEDGER_AUDIT_DATABASE_URL: postgres://ledger_audit@postgres:5432/ledger?sslmode=disable
+      LEDGER_SECRET_CORRIDOR_WORKER: ${LEDGER_SECRET_CORRIDOR_WORKER:-}
+      LEDGER_SECRET_CORRIDOR_AUDIT: ${LEDGER_SECRET_CORRIDOR_AUDIT:-}
+      LEDGER_SECRET_SEED: ${LEDGER_SECRET_SEED:-}
+      LEDGER_SECRET_OPERATOR: ${LEDGER_SECRET_OPERATOR:-}
+    configs:
+      - source: clients
+        target: /etc/ledger/clients.yaml
+    ports:
+      - "127.0.0.1:9090:9090"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "/ledger", "healthcheck"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+configs:
+  clients:
+    file: deploy/clients.yaml
