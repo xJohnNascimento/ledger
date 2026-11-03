@@ -1,7 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "ignoreDeps": ["github.com/xJohnNascimento/ledger/api"],
   "postUpdateOptions": ["gomodTidy"],
+  "rebaseWhen": "behind-base-branch",
   "labels": ["release: patch"],
   "packageRules": [
     {
@@ -13,6 +15,17 @@
       "description": "Code generators and linters run through go tool never reach the image, so their updates release nothing",
       "matchPackageNames": ["github.com/bufbuild/buf"],
       "labels": ["release: none"]
+    },
+    {
+      "description": "Compose runs the local stack only, so its image updates release nothing",
+      "matchManagers": ["docker-compose"],
+      "labels": ["release: none"]
+    },
+    {
+      "description": "PostgreSQL moves a major version by hand, together with the test containers and Aurora",
+      "matchPackageNames": ["postgres"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ]
 }
