@@ -41,8 +41,16 @@ jobs:
             echo "No pull request merged since the last release asks for one."
             exit 0
           fi
-          # The Go API module is released with the service, under its own tag.
-          gh api "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/api/$version" -f sha="$SHA" > /dev/null
+          # The Go API module is released with the service, under its own tag. A run that failed
+          # after this step finds the tag already in place, so it is created only when missing.
+          if tagged=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/api/$version" --jq .object.sha 2>/dev/null); then
+            if [ "$tagged" != "$SHA" ]; then
+              echo "::error::The tag api/$version already points at $tagged, not at $SHA. Move or delete it before this release can continue."
+              exit 1
+            fi
+          else
+            gh api "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/api/$version" -f sha="$SHA" > /dev/null
+          fi
           gh release create "$version" --repo "$GITHUB_REPOSITORY" --target "$SHA" --title "$version" --generate-notes
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
