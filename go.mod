@@ -18,7 +18,7 @@ require (
 	github.com/testcontainers/testcontainers-go/modules/postgres v0.44.0
 	github.com/xJohnNascimento/ledger/api v0.0.0
 	go.yaml.in/yaml/v3 v3.0.5
-	google.golang.org/protobuf v1.36.12
+	google.golang.org/protobuf v1.36.13-0.20261016172727-e9ee2a76ab8e
 	pgregory.net/rapid v1.3.0
 )
 
@@ -45,8 +45,8 @@ require (
 	github.com/Azure/go-ansiterm v0.0.0-20261006220739-8c912ac31dd4 // indirect
 	github.com/Microsoft/go-winio v0.6.4 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
-	github.com/bufbuild/buf v1.74.0 // indirect
-	github.com/bufbuild/protocompile v0.14.2-0.20261013160345-b79bfe2f85df // indirect
+	github.com/bufbuild/buf v1.75.0 // indirect
+	github.com/bufbuild/protocompile v0.14.2-0.20261020145055-56248e843b50 // indirect
 	github.com/bufbuild/protoplugin v0.0.0-20260414125817-25d1d281b46b // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
