@@ -4,7 +4,7 @@ A double-entry accounting service whose guarantees can be checked: through its A
 
 It knows nothing about FX, providers or workflows. [Corridor](https://github.com/xJohnNascimento/corridor), an FX payments product, is its first client.
 
-**Status:** L0–L6 are built and tested; release tags come with the first publication. The benchmark (L7) is the stretch task in [`docs/plan.md`](docs/plan.md).
+**Status:** The accounting model, reservations, API, independent audit, operator controls and Terraform sandbox are built and tested. Each release publishes a signed image to `ghcr.io/xjohnnascimento/ledger` and tags the API module; the latest is v0.3.1. The benchmark is next, as the stretch task in [`docs/plan.md`](docs/plan.md).
 
 ## What it guarantees
 
@@ -72,6 +72,8 @@ docker compose exec ledger /ledger audit corridor
 
 Every pull request carries one label that says what merging it releases: `release: major`, `release: minor`, `release: patch` or `release: none`. Once it merges and CI passes on `main`, the next version is tagged twice, `vX.Y.Z` for the service and `api/vX.Y.Z` for the Go API module, with GitHub release notes and a signed multi-architecture image on GitHub Container Registry. A change that breaks the API compared with the last release must be labelled `release: major`, or `release: minor` before 1.0.
 
+A tag pushed by hand builds, signs and publishes the image after CI passes, and nothing more: it gets no `api/` tag and no GitHub release.
+
 ## Documentation
 
 | Document | Contents |
@@ -80,3 +82,7 @@ Every pull request carries one label that says what merging it releases: `releas
 | [`docs/plan.md`](docs/plan.md) | Build tasks L0–L7 |
 | [`docs/adr/`](docs/adr/README.md) | Decisions: reservations, the single-writer design |
 | [`infra/README.md`](infra/README.md) | Terraform for an optional AWS sandbox |
+
+## License
+
+[MIT](LICENSE)

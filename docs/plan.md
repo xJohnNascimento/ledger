@@ -2,7 +2,7 @@
 
 The ledger's build tasks, in order. Each task is done when its code and tests are merged with CI green, its "done when" is shown, and the design is updated in the same pull request. How these tasks fit with Corridor and Ditto, and which releases Corridor waits for, is in Corridor's [cross-repository plan](https://github.com/xJohnNascimento/corridor/blob/main/docs/plan.md).
 
-**Status:** L0–L6 are done; their release tags are cut when the repository is published. L7, the benchmark, is a stretch task and not started.
+**Status:** L0–L6 are done and released; the latest release is v0.3.1, with its image on `ghcr.io/xjohnnascimento/ledger`. Releases are cut from the labels on merged pull requests, so the versions named in the rows below were the plan's targets, not the numbers published. L7, the benchmark, is a stretch task and not started.
 
 | Id | Task | Done when | Depends on |
 | --- | --- | --- | --- |

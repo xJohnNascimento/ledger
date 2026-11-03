@@ -280,7 +280,7 @@ Go with connect-go, pgx v5, goose, testcontainers-go and rapid. Writes go throug
 
 ## 12. Production path (designed, not built)
 
-The single-writer ledger is enough for the showcase. A separate production-scale design records what a production deployment adds and why each is deferred:
+The single-writer ledger is enough for the showcase. A production deployment would add the following, and each item is deferred until measurement or a real requirement calls for it:
 
 | Production concern | Where it would go |
 | --- | --- |
