@@ -4,7 +4,7 @@ A double-entry accounting service whose guarantees can be checked: through its A
 
 It knows nothing about FX, providers or workflows. [Corridor](https://github.com/xJohnNascimento/corridor), an FX payments product, is its first client.
 
-**Status:** The accounting model, reservations, API, independent audit, operator controls and Terraform sandbox are built and tested. Each release publishes a signed image to `ghcr.io/xjohnnascimento/ledger` and tags the API module; the latest is v0.3.1. The benchmark is next, as the stretch task in [`docs/plan.md`](docs/plan.md).
+**Status:** The accounting model, reservations, API, independent audit, operator controls and Terraform sandbox are built and tested. Each [release](https://github.com/xJohnNascimento/ledger/releases) publishes a signed image to `ghcr.io/xjohnnascimento/ledger` and tags the API module. The benchmark is next, as the stretch task in [`docs/plan.md`](docs/plan.md).
 
 ## What it guarantees
 
