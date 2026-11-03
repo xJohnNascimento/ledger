@@ -1,6 +1,6 @@
 # infra
 
-Terraform that deploys the ledger to the shared AWS sandbox. Local runs never need it.
+Terraform that deploys the ledger to the shared AWS sandbox, a disposable test environment that is never production. Local runs never need it.
 
 The sandbox foundation (network, ECS cluster, service discovery, GitHub OIDC provider) belongs to Corridor's `infra/` and is published in SSM Parameter Store under `/sandbox/foundation/`. Apply it first.
 
